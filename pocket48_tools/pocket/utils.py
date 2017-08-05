@@ -61,7 +61,7 @@ class PocketSession(requests.Session):
             'latitude': '0',
             'longitude': '0',
             'password': str(self.password),
-            'userid': str(self.phonenum),
+            'account': str(self.phonenum),
         }
         res = self.post(url, json=data).json()
         if res['status'] == 200:
@@ -85,7 +85,7 @@ class PocketSession(requests.Session):
 
     def get_niudan(self):
         """
-        扭蛋
+        扭蛋。注意：免费机会为0时，调用这个方法会花掉 10 个鸡腿。
 
         返回值格式为：
             [{
@@ -222,7 +222,7 @@ class PocketSession(requests.Session):
         url = 'https://pjuju.48.cn/imsystem/api/im/v1/member/room/hot'
         data = {
             "groupId": 0,
-            "needRootRoom": true,
+            "needRootRoom": True,
             "page": page,
             "topMemberIds": []
         }
