@@ -3,11 +3,25 @@ author: sljeff
 email: kindjeff.com@gmail.com
 """
 import requests
+import random
 
 
 def get_imei_str():
-    # TODO
-    return '867875026844420'
+    tac = random.randint(1000, 9999)
+    fac = random.randint(10, 99)
+    snr = random.randint(100000, 999999)
+    imei_arr = ['86', str(tac), str(fac), str(snr)]
+    imei_14 = ''.join(imei_arr)
+    index_even = False
+    imei_last = 0
+    for c in imei_14:
+        c_int = int(c) * 2 if index_even else int(c)
+        imei_last += c_int
+        index_even = (not index_even)
+    imei_last = imei_last % 10
+
+    imei = imei_14 + str(imei_last)
+    return imei
 
 
 class PocketSession(requests.Session):
