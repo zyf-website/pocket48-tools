@@ -50,15 +50,15 @@ def get_live_subscription():
     """
     返回值格式：
         {
-            成员ID: 订阅者ID数组,
+            成员ID: 订阅者数组,
         }
     """
     lss = LiveSubscription.select().where(LiveSubscription.deleted==0)
     result = {}
     for ls in lss:
-        subscriptor_ids = result.get(ls.member.member_id, [])
-        subscriptor_ids.append(ls.subscriptor_id)
-        result[ls.member.member_id] = subscriptor_ids
+        subscriptors = result.get(ls.member.member_id, [])
+        subscriptors.append(ls.subscriptor)
+        result[ls.member.member_id] = subscriptors
     return result
 
 
