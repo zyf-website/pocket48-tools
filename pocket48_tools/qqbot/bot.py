@@ -15,7 +15,7 @@ class QQBot:
         
     @property
     def url(self):
-        return '{}://{}:{}'.format(schema, host, port)
+        return '{}://{}:{}'.format(self.schema, self.host, self.port)
 
     def __getattr__(self, method_name):
         """
